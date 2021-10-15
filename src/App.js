@@ -1,5 +1,6 @@
 import Header from "./components/Header";
-import SideBar from "./components/SideBar";
+import SideBar from "./components/sidebar/SideBar";
+import Body from "./components/RepoBody/Body";
 import "./App.css";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <Header />
       <div className="app__body">
         <SideBar />
+        <Body />
       </div>
     </div>
   );
