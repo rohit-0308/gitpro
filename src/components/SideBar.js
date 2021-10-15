@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Repo from "./Repo";
 
 const SideBar = () => {
+  const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <>
       <SideBarWrapper>
         <SearchBar>
-          <input type="text" placeholder="Search Github User" />
-          <button>Search</button>
+          <form>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Github User"
+            />
+            <button onClick={handleSubmit}>
+              {loading ? "Searching..." : "Search"}
+            </button>
+          </form>
         </SearchBar>
         <RepoLists>
           <Repo />
@@ -33,7 +48,7 @@ const SideBarWrapper = styled.div`
   flex-direction: column;
   height: 100%;
   width: 30%;
-  min-width: 270px;
+  min-width: 300px;
   border-right: 1px solid rgba(240, 246, 252, 0.1);
   /* background-color: aqua; */
 `;
@@ -44,8 +59,12 @@ const SearchBar = styled.div`
   height: 5%;
   border-bottom: 1px solid rgba(240, 246, 252, 0.1);
 
-  input {
+  form {
     display: flex;
+    flex: 1;
+  }
+
+  input {
     flex: 1;
     border: none;
     background-color: #21262d;
@@ -58,8 +77,12 @@ const SearchBar = styled.div`
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
     color: #c9d1d9;
-    width: 70px;
+    /* width: auto; */
     height: 30px;
     border: 1px solid rgba(240, 246, 252, 0.1);
     border-radius: 5px;
