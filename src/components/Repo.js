@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-const Repo = () => {
+const Repo = ({ id, name, desc }) => {
   return (
     <>
-      <SingleRepo>
-        <h2 style={{ margin: "0" }}>Repository Name</h2>
-        <p style={{ margin: "0" }}>Repository Description</p>
+      <SingleRepo key={id}>
+        <h2 style={{ margin: "0" }}>{name}</h2>
+        <p style={{ margin: "0" }}>{desc}</p>
       </SingleRepo>
     </>
   );

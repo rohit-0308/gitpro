@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 import Repo from "./Repo";
 
 const SideBar = () => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
+  const [repos, setRepos] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    searchRepos();
   };
+
+  const searchRepos = () => {
+    setLoading(true);
+    axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
+      setLoading(false);
+      setRepos(res.data);
+    });
+  };
+
   return (
     <>
       <SideBarWrapper>
@@ -26,15 +38,11 @@ const SideBar = () => {
           </form>
         </SearchBar>
         <RepoLists>
-          <Repo />
-          <Repo />
-          <Repo />
-          <Repo />
-          <Repo />
-          <Repo />
-          <Repo />
-          <Repo />
-          <Repo />
+          {repos.map((repo) => {
+            return (
+              <Repo id={repo.id} name={repo.name} desc={repo.description} />
+            );
+          })}
         </RepoLists>
       </SideBarWrapper>
     </>
