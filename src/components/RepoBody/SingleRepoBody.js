@@ -22,13 +22,21 @@ const SingleRepoBody = () => {
           </ButtonWrapper>
         </Buttons>
         <Wrapper>
-          {showBranches
-            ? branches.map((branch) => {
+          {showBranches ? (
+            branches.length > 0 ? (
+              branches.map((branch) => {
                 return <Branches />;
               })
-            : issues.map((issue) => {
-                return <Issues />;
-              })}
+            ) : (
+              <h2>No Branches To Show</h2>
+            )
+          ) : issues.length > 0 ? (
+            issues.map((branch) => {
+              return <Issues />;
+            })
+          ) : (
+            <h2>No Issues To Show</h2>
+          )}
         </Wrapper>
       </BodyWrapper>
     </>
