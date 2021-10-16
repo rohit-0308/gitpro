@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Branches from "./Branches";
 import Issues from "./Issues";
@@ -15,14 +15,27 @@ const SingleRepoBody = () => {
     axios
       // .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
       .get(
+        `https://api.github.com/repos/${params.username}/${params.name}/issues/events`
+      )
+      .then((res) => {
+        setIssues(res.data);
+      });
+  }, [params.name]);
+
+  console.log(issues);
+
+  useEffect(() => {
+    axios
+      // .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
+      .get(
         `https://api.github.com/repos/${params.username}/${params.name}/branches`
       )
       .then((res) => {
         setBranches(res.data);
       });
-  });
+  }, [params.name]);
 
-  console.log(branches);
+  // console.log(branches);
 
   return (
     <>
@@ -34,6 +47,7 @@ const SingleRepoBody = () => {
           >
             Branches
           </ButtonWrapper>
+
           <ButtonWrapper
             className={showBranches ? "" : "active"}
             onClick={() => setShowBranches(false)}
@@ -51,8 +65,14 @@ const SingleRepoBody = () => {
               <h2 style={{ margin: "0" }}>No Branches To Show</h2>
             )
           ) : issues.length > 0 ? (
-            issues.map((branch) => {
-              return <Issues />;
+            issues.map((issue) => {
+              return (
+                <Issues
+                  title={issue.title}
+                  author={issue.user.login}
+                  avatar={issue.user.avatar_url}
+                />
+              );
             })
           ) : (
             <h2 style={{ margin: "0", padding: "10px" }}>No Issues To Show</h2>

@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Issues = () => {
+const Issues = ({ title, author, avatar }) => {
   return (
     <>
       <IssueWrapper>
-        <h4 style={{ margin: "0" }}>issues</h4>
+        <Title>{title}</Title>
+        <Author>
+          <img src={avatar} alt="avatar" />
+          <p>{author}</p>
+        </Author>
       </IssueWrapper>
     </>
   );
@@ -19,5 +23,24 @@ const IssueWrapper = styled.div`
   display: flex;
   padding: 10px;
   border-bottom: 1px solid rgba(240, 246, 252, 0.1);
-  cursor: pointer;
+`;
+
+const Title = styled.h3`
+  margin: 0;
+`;
+
+const Author = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  p {
+    margin: 0;
+    padding-left: 10px;
+  }
 `;
