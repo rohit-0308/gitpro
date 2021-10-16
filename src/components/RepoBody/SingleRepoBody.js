@@ -28,14 +28,14 @@ const SingleRepoBody = () => {
                 return <Branches />;
               })
             ) : (
-              <h2>No Branches To Show</h2>
+              <h2 style={{ margin: "0" }}>No Branches To Show</h2>
             )
           ) : issues.length > 0 ? (
             issues.map((branch) => {
               return <Issues />;
             })
           ) : (
-            <h2>No Issues To Show</h2>
+            <h2 style={{ margin: "0" }}>No Issues To Show</h2>
           )}
         </Wrapper>
       </BodyWrapper>
