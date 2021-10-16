@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import Branches from "./Branches";
 import Issues from "./Issues";
@@ -7,17 +8,42 @@ const SingleRepoBody = () => {
   const [showBranches, setShowBranches] = useState(true);
   const [branches, setBranches] = useState([]);
   const [issues, setIssues] = useState([]);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   searchRepos();
+  // };
+
+  // const searchRepos = () => {
+  //   setLoading(true);
+  //   axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
+  //     setLoading(false);
+  //     setRepos(res.data);
+  //   });
+  // };
+
+  useEffect(() => {
+    axios
+      .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
+      .then((res) => {
+        setBranches(res.data);
+      });
+  }, []);
+
   return (
     <>
       <BodyWrapper>
         <Buttons>
           <ButtonWrapper
-            className="active"
+            className={showBranches ? "active" : ""}
             onClick={() => setShowBranches(true)}
           >
             Branches
           </ButtonWrapper>
-          <ButtonWrapper onClick={() => setShowBranches(false)}>
+          <ButtonWrapper
+            className={showBranches ? "" : "active"}
+            onClick={() => setShowBranches(false)}
+          >
             Issues
           </ButtonWrapper>
         </Buttons>
@@ -25,7 +51,7 @@ const SingleRepoBody = () => {
           {showBranches ? (
             branches.length > 0 ? (
               branches.map((branch) => {
-                return <Branches />;
+                return <Branches commit={branch.commit} name={branch.name} />;
               })
             ) : (
               <h2 style={{ margin: "0" }}>No Branches To Show</h2>
@@ -35,7 +61,7 @@ const SingleRepoBody = () => {
               return <Issues />;
             })
           ) : (
-            <h2 style={{ margin: "0" }}>No Issues To Show</h2>
+            <h2 style={{ margin: "0", padding: "10px" }}>No Issues To Show</h2>
           )}
         </Wrapper>
       </BodyWrapper>
@@ -78,4 +104,5 @@ const Wrapper = styled.div`
   border-right: 1px solid rgba(240, 246, 252, 0.1);
   border-bottom: 1px solid rgba(240, 246, 252, 0.1);
   border-left: 1px solid rgba(240, 246, 252, 0.1);
+  overflow: scroll;
 `;

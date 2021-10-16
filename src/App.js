@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Header from "./components/Header";
 import BranchPage from "./components/BranchPage/BranchPage";
-import SideBar from "./components/sidebar/SideBar";
-import Body from "./components/RepoBody/Body";
+import SideBar from "./components/LeftPanel/SideBar";
+import Body from "./components/RightPanel/Body";
 import "./App.css";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
               </div>
             </div>
           </Route>
-          <Route path="/branch">
+          <Route path="/commits">
             <BranchPage />
           </Route>
         </Switch>

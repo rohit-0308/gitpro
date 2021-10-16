@@ -39,7 +39,7 @@ const SideBar = () => {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Github User"
+              placeholder="Github Username"
             />
             <button onClick={handleSubmit}>
               {loading ? "Searching..." : "Search"}

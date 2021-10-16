@@ -1,10 +1,21 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Header = () => {
+  const history = useHistory();
+
+  const handleBack = () => {
+    history.push("/");
+  };
+
   return (
     <>
       <HeaderWrapper>
+        <BackButton>
+          <AiOutlineArrowLeft onClick={handleBack} />
+        </BackButton>
         <TitleWrapper>
           <Title>
             <span>Commits:</span> Branch Name
@@ -26,6 +37,13 @@ const HeaderWrapper = styled.div`
   letter-spacing: 2px;
   background-color: #161b22;
   z-index: 999px;
+`;
+
+const BackButton = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 `;
 
 const TitleWrapper = styled.div`
