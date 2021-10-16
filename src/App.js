@@ -10,7 +10,10 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path="/" exact>
+          <Route path="/repos/:username/:name/commits/:sha">
+            <BranchPage />
+          </Route>
+          <Route path="/repos/:username/:name/branches">
             <div className="App">
               <Header />
               <div className="app__body">
@@ -19,8 +22,15 @@ function App() {
               </div>
             </div>
           </Route>
-          <Route path="/commits">
-            <BranchPage />
+
+          <Route path="/" exact>
+            <div className="App">
+              <Header />
+              <div className="app__body">
+                <SideBar />
+                <Body />
+              </div>
+            </div>
           </Route>
         </Switch>
       </Router>

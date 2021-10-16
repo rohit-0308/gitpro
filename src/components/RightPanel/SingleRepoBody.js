@@ -1,34 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Branches from "./Branches";
 import Issues from "./Issues";
 
 const SingleRepoBody = () => {
+  const params = useParams();
   const [showBranches, setShowBranches] = useState(true);
   const [branches, setBranches] = useState([]);
   const [issues, setIssues] = useState([]);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   searchRepos();
-  // };
-
-  // const searchRepos = () => {
-  //   setLoading(true);
-  //   axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
-  //     setLoading(false);
-  //     setRepos(res.data);
-  //   });
-  // };
-
   useEffect(() => {
     axios
-      .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
+      // .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
+      .get(
+        `https://api.github.com/repos/${params.username}/${params.name}/branches`
+      )
       .then((res) => {
         setBranches(res.data);
       });
-  }, []);
+  });
+
+  console.log(branches);
 
   return (
     <>

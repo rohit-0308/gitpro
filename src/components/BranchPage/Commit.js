@@ -1,18 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const Commit = () => {
+const Commit = ({ author, date, message }) => {
   return (
     <>
       <CommitWrapper>
-        <h3 style={{ margin: "0" }}>10 Mar 2021</h3>
-        <p style={{ margin: "0", fontSize: "14px" }}>
-          Commit Message Lorem ipsum dolor sit, amet consectetur adipisicing
-          elit. Nostrum excepturi recusandae expedita veritatis iusto tenetur!
-        </p>
+        <h3 style={{ margin: "0" }}>{date}</h3>
+        <p style={{ margin: "0", fontSize: "14px" }}>{message}</p>
         <UserWrapper>
           <Avatar></Avatar>
-          <h4 style={{ margin: "0 15px" }}>UserName</h4>
+          <h4 style={{ margin: "0 15px" }}>{author}</h4>
         </UserWrapper>
       </CommitWrapper>
     </>
