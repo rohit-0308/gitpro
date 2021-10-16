@@ -3,11 +3,19 @@ import styled from "styled-components";
 import axios from "axios";
 import Repo from "./Repo";
 import NoRepo from "./NoRepo";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import Dialog from "@mui/material/Dialog";
+import TextField from "@mui/material/TextField";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const SideBar = () => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [repos, setRepos] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,6 +62,38 @@ const SideBar = () => {
             <NoRepo />
           )}
         </ReposList>
+        <AddRepoButtonWrapper>
+          <AddRepoButton onClick={() => setShowModal(true)}>
+            <AiOutlinePlus />
+          </AddRepoButton>
+        </AddRepoButtonWrapper>
+
+        <Dialog open={showModal} onClose={() => setShowModal(false)}>
+          <DialogTitle>Add New Repository</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Owner/Organization"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              label="Repository Name"
+              type="text"
+              fullWidth
+              variant="standard"
+              style={{ color: "white" }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <ModalButton onClick={() => setShowModal(false)}>Add</ModalButton>
+          </DialogActions>
+        </Dialog>
       </SideBarWrapper>
     </>
   );
@@ -123,4 +163,36 @@ const ReposList = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const AddRepoButtonWrapper = styled.div`
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #161b22;
+  border-top: 1px solid rgba(240, 246, 252, 0.1);
+`;
+
+const AddRepoButton = styled.div`
+  height: 50px;
+  width: 50px;
+  background-color: #3fb950;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  margin: 10px;
+`;
+
+const ModalButton = styled.div`
+  height: 40px;
+  width: 70px;
+  background-color: #3fb950;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: white;
 `;
