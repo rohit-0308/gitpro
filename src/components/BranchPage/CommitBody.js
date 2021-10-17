@@ -18,7 +18,6 @@ const CommitBody = () => {
       });
   }, [params].name);
 
-  console.log(commits);
   return (
     <>
       <CommitsWrapper>
