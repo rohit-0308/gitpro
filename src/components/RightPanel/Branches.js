@@ -5,10 +5,7 @@ import styled from "styled-components";
 const Branches = ({ name, commit }) => {
   return (
     <>
-      <Link
-        to={`commits/${commit.sha}`}
-        style={{ textDecoration: "none", color: "white" }}
-      >
+      <Link to="commits" style={{ textDecoration: "none", color: "white" }}>
         <BranchWrapper>
           <h4 style={{ margin: "0" }}>{name} branch</h4>
         </BranchWrapper>

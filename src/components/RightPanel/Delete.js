@@ -20,7 +20,6 @@ export default Delete;
 const DeleteWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  /* align-items: center; */
   padding: 10px;
   height: 5%;
   border-bottom: 1px solid rgba(240, 246, 252, 0.1);

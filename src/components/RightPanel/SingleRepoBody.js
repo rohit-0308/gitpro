@@ -21,8 +21,6 @@ const SingleRepoBody = () => {
       });
   }, [params.name]);
 
-  console.log(issues);
-
   useEffect(() => {
     axios
       .get(
@@ -32,8 +30,6 @@ const SingleRepoBody = () => {
         setBranches(res.data);
       });
   }, [params.name]);
-
-  // console.log(branches);
 
   return (
     <>

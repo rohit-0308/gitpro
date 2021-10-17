@@ -6,7 +6,7 @@ const Repo = ({ id, username, name, desc }) => {
   return (
     <>
       <Link
-        to={`repos/${username}/${name}/branches`}
+        to={`/repos/${username}/${name}/branches`}
         style={{ textDecoration: "none", color: "white" }}
       >
         <SingleRepo key={id}>

@@ -10,7 +10,7 @@ function App() {
     <>
       <Router>
         <Switch>
-          <Route path="/repos/:username/:name/commits/:sha">
+          <Route path="/repos/:username/:name/commits">
             <BranchPage />
           </Route>
 
