@@ -4,7 +4,7 @@ import styled from "styled-components";
 const NoRepo = () => {
   return (
     <Wrapper>
-      No repository to show <br />
+      No repository to show
       <span>Please enter a valid Github Username</span>
     </Wrapper>
   );
@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   padding: 10px;
 
   span {
+    margin: 0;
     color: gray;
   }
 `;

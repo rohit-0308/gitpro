@@ -13,7 +13,6 @@ const SingleRepoBody = () => {
 
   useEffect(() => {
     axios
-      // .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
       .get(
         `https://api.github.com/repos/${params.username}/${params.name}/issues/events`
       )
@@ -26,7 +25,6 @@ const SingleRepoBody = () => {
 
   useEffect(() => {
     axios
-      // .get("https://api.github.com/repos/rohit-0308/Airbnb-Clone/branches")
       .get(
         `https://api.github.com/repos/${params.username}/${params.name}/branches`
       )
@@ -62,7 +60,9 @@ const SingleRepoBody = () => {
                 return <Branches commit={branch.commit} name={branch.name} />;
               })
             ) : (
-              <h2 style={{ margin: "0" }}>No Branches To Show</h2>
+              <h2 style={{ margin: "0", padding: "10px" }}>
+                No Branches To Show
+              </h2>
             )
           ) : issues.length > 0 ? (
             issues.map((issue) => {

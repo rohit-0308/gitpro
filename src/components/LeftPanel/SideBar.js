@@ -3,31 +3,50 @@ import styled from "styled-components";
 import axios from "axios";
 import Repo from "./Repo";
 import NoRepo from "./NoRepo";
-import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import Dialog from "@mui/material/Dialog";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 const SideBar = () => {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
   const [repos, setRepos] = useState([]);
+  const [invalid, setInvalid] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [newRepo, setNewRepo] = useState({
+    name: "",
+    description: "",
+  });
+
+  const handleModalSubmit = () => {
+    setShowModal(false);
+    setRepos([...repos, newRepo]);
+    setNewRepo({ name: "", description: "" });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     searchRepos();
   };
 
+  // useEffect(() => {})
+
   const searchRepos = () => {
     setLoading(true);
-    axios.get(`https://api.github.com/users/${username}/repos`).then((res) => {
-      setLoading(false);
-      setRepos(res.data);
-    });
+    axios
+      .get(`https://api.github.com/users/${username}/repos`)
+      .then((res) => {
+        setLoading(false);
+        setInvalid(false);
+        setRepos(res.data);
+      })
+      .catch((error) => {
+        setInvalid(true);
+        setLoading(false);
+      });
   };
 
   return (
@@ -47,7 +66,11 @@ const SideBar = () => {
           </form>
         </SearchBar>
         <ReposList>
-          {repos.length > 0 ? (
+          {invalid === true ? (
+            <InvalidWrapper>
+              <h3 style={{ margin: "0" }}>Invalid Username</h3>
+            </InvalidWrapper>
+          ) : repos.length > 0 ? (
             repos.map((repo) => {
               return (
                 <Repo
@@ -75,23 +98,28 @@ const SideBar = () => {
               autoFocus
               margin="dense"
               id="name"
-              label="Owner/Organization"
-              type="text"
-              fullWidth
-              variant="standard"
-            />
-            <TextField
-              margin="dense"
-              id="name"
               label="Repository Name"
               type="text"
               fullWidth
               variant="standard"
-              style={{ color: "white" }}
+              value={newRepo.name}
+              onChange={(e) => setNewRepo({ ...newRepo, name: e.target.value })}
+            />
+            <TextField
+              margin="dense"
+              id="name"
+              label="Repository Description"
+              type="text"
+              fullWidth
+              variant="standard"
+              value={newRepo.description}
+              onChange={(e) =>
+                setNewRepo({ ...newRepo, description: e.target.value })
+              }
             />
           </DialogContent>
           <DialogActions>
-            <ModalButton onClick={() => setShowModal(false)}>Add</ModalButton>
+            <ModalButton onClick={handleModalSubmit}>Add</ModalButton>
           </DialogActions>
         </Dialog>
       </SideBarWrapper>
@@ -163,6 +191,15 @@ const ReposList = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+`;
+
+const InvalidWrapper = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 `;
 
 const AddRepoButtonWrapper = styled.div`
