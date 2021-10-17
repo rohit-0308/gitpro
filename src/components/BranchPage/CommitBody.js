@@ -16,7 +16,7 @@ const CommitBody = () => {
       .then((res) => {
         setCommits(res.data);
       });
-  }, [params.sha]);
+  }, [params].name);
 
   console.log(commits);
   return (
