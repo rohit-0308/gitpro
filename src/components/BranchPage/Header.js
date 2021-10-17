@@ -1,20 +1,16 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 const Header = () => {
-  const history = useHistory();
-
-  const handleBack = () => {
-    history.push("/");
-  };
-
   return (
     <>
       <HeaderWrapper>
         <BackButton>
-          <AiOutlineArrowLeft onClick={handleBack} />
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <AiOutlineArrowLeft />
+          </Link>
         </BackButton>
         <TitleWrapper>
           <Title>

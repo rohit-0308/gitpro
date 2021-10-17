@@ -32,8 +32,6 @@ const SideBar = () => {
     searchRepos();
   };
 
-  // useEffect(() => {})
-
   const searchRepos = () => {
     setLoading(true);
     axios
@@ -136,7 +134,6 @@ const SideBarWrapper = styled.div`
   width: 30%;
   min-width: 300px;
   border-right: 1px solid rgba(240, 246, 252, 0.1);
-  /* background-color: aqua; */
 `;
 
 const SearchBar = styled.div`
@@ -168,7 +165,6 @@ const SearchBar = styled.div`
     align-items: center;
     padding: 10px;
     color: #c9d1d9;
-    /* width: auto; */
     height: 30px;
     border: 1px solid rgba(240, 246, 252, 0.1);
     border-radius: 5px;

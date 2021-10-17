@@ -14,7 +14,7 @@ const SingleRepoBody = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.github.com/repos/${params.username}/${params.name}/issues/events`
+        `https://api.github.com/repos/${params.username}/${params.name}/issues`
       )
       .then((res) => {
         setIssues(res.data);
